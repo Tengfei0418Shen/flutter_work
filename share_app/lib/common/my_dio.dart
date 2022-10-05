@@ -1,29 +1,33 @@
+import 'dart:convert';
+
 import 'package:dio/dio.dart';
+import 'package:local_cache_sync/local_cache_sync.dart';
+import 'package:share_app/models/ResponseDart.dart';
 
 
-var dio = Dio();
-final Dio _dio = Dio(
+
+Dio _dio = Dio(
   BaseOptions(
-    baseUrl: 'http://10.40.232.190:8082',
+    baseUrl: 'http://10.40.232.190:8083/api',
     connectTimeout: 5000,
     receiveTimeout: 3000,
     headers:  {'contentType': 'application/json'}
   ),
 );
-
-setOptions(dio){
-  dio.interceptors.add(LogInterceptor(responseBody: true));
-  dio.options.baseUrl = 'http://10.40.232.190:8082';
-  dio.options.headers = {'contentType': 'application/json'};
-  return dio;
+login(data) async{
+  Response response = await _dio.post('/user/login',data:data) as Response;
+  ResponseDart responsedart = ResponseDart.fromJson(
+      json.decode(response.toString()));
+  _dio.options.headers =  {"token":responsedart.data.token};
+  return response;
 }
 
 get(url){
-  dio = setOptions(dio);
-  return dio.get(url);
+  print(_dio.options.headers);
+  print(_dio.options.baseUrl+url);
+  return _dio.get(url);
 }
 
 doPost(url,data){
-  print('http://10.40.232.190:8082'+url);
-  return _dio.post('http://10.40.232.190:8082'+url,data:data);
+  return _dio.post(url,data:data);
 }

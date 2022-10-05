@@ -33,6 +33,7 @@ class Data {
     required this.avatar,
     required this.createTime,
     required this.updateTime,
+    required this.token,
     required this.bonus,
   });
   late final int id;
@@ -43,6 +44,7 @@ class Data {
   late final String avatar;
   late final String createTime;
   late final String updateTime;
+  late final String token;
   late final int bonus;
 
   Data.fromJson(Map<dynamic, dynamic> json){
@@ -55,6 +57,7 @@ class Data {
     createTime = json['createTime'];
     updateTime = json['updateTime'];
     bonus = json['bonus'];
+    token = json['token'];
   }
 
   Map<dynamic, dynamic> toJson() {
@@ -68,6 +71,7 @@ class Data {
     _data['createTime'] = createTime;
     _data['updateTime'] = updateTime;
     _data['bonus'] = bonus;
+    _data['token'] = token;
     return _data;
   }
 }

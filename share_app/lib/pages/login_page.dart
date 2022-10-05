@@ -130,7 +130,7 @@ class LoginPage extends StatelessWidget {
                         'password': passwordController.value.text,
                       });
                       try{
-                        response = await doPost("/user/login", data);
+                        response = await login(data);
                         responsedart = ResponseDart.fromJson(
                             json.decode(response.toString()));
                         if (responsedart.code == 1) {

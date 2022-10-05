@@ -7,6 +7,7 @@ import 'package:share_app/styles/config.dart';
 import '../common/local_cache.dart';
 import '../models/ResponseDart.dart';
 import 'blank.dart';
+import 'home_page.dart';
 
 class IndexPage extends StatefulWidget {
   const IndexPage({Key? key}) : super(key: key);
@@ -37,7 +38,7 @@ class _IndexPageState extends State<IndexPage> {
         // ),
         body: TabBarView(
           children: [
-            BlankPage(),
+            HomePage(),
             BlankPage(),
             BlankPage(),
             ProfilePage(),
